@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import { Client, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, CommandInteraction, MessageFlags } from "discord.js";
+import { Client, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, CommandInteraction, MessageFlags, GatewayIntentBits } from "discord.js";
 import express from "express";
 import { OAuth2Client } from "google-auth-library";
 
@@ -16,7 +16,7 @@ const {
 } = process.env;
 
 const discordClient = new Client({
-  intents: [],
+  intents: [GatewayIntentBits.Guilds],
 });
 
 const oAuth2Client = new OAuth2Client(
