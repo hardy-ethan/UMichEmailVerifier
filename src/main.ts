@@ -100,6 +100,9 @@ app.get("/auth/google/callback", async (req, res) => {
     return;
   }
 
+  // No further authentication is needed since Google restricts this application
+  // to only allow login via umich.edu users.
+
   try {
     const { tokens } = await oAuth2Client.getToken(code as string);
     oAuth2Client.setCredentials(tokens);
