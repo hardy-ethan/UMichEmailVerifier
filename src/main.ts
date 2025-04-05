@@ -74,6 +74,7 @@ async function handleVerifyCommand(interaction: CommandInteraction) {
   const embed = new EmbedBuilder()
     .setTitle("UMich Email Verification")
     .setDescription("Click the button below to verify your UMich email via Google login.\n\n" +
+      "You **must** use your UMich Google account.\n\n" + 
       "Your email address may be stored in Google systems and (temporary) application memory in order for the application to run properly, " +
       "but it will not be shared.")
     .setColor(0x4285F4);
