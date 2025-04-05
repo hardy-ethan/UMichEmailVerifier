@@ -53,18 +53,18 @@ discordClient.on("interactionCreate", async (interaction) => {
 async function handleVerifyCommand(interaction: CommandInteraction) {
   await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
-  const state = crypto.randomBytes(8).toString("hex");
+  const oAuthRequestID = crypto.randomBytes(8).toString("hex");
 
-  verificationAttempts.set(state, {
+  verificationAttempts.set(oAuthRequestID, {
     discordUserID: interaction.user.id,
-    state,
+    state: oAuthRequestID,
     timestamp: Date.now(),
   });
 
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: "offline",
     scope: ["openid"],
-    state,
+    state: oAuthRequestID,
   });
 
   const embed = new EmbedBuilder()
