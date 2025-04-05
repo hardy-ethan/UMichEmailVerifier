@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import { Client, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder, CommandInteraction, MessageFlags, GatewayIntentBits } from "discord.js";
 import express from "express";
 import { OAuth2Client } from "google-auth-library";
+import crypto from "crypto";
 
 dotenv.config();
 
@@ -52,7 +53,7 @@ discordClient.on("interactionCreate", async (interaction) => {
 async function handleVerifyCommand(interaction: CommandInteraction) {
   await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
-  const state = Math.random().toString(36).substring(2, 15);
+  const state = crypto.randomBytes(8).toString("hex");
 
   verificationAttempts.set(state, {
     discordUserID: interaction.user.id,
