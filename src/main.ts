@@ -50,11 +50,6 @@ discordClient.on("interactionCreate", async (interaction) => {
 });
 
 async function handleVerifyCommand(interaction: CommandInteraction) {
-  if (!interaction.guild) {
-    await interaction.reply({ content: "This command can only be used in a server.", flags: MessageFlags.Ephemeral });
-    return;
-  }
-
   await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
   const state = Math.random().toString(36).substring(2, 15);
@@ -160,9 +155,8 @@ setInterval(() => {
 
 discordClient.once("ready", async () => {
   try {
-    const guild = discordClient.guilds.cache.get(SERVER_ID as string);
-    if (guild) {
-      await guild.commands.create({
+    if (discordClient.application) {
+      await discordClient.application.commands.create({
         name: "verify",
         description: "Verify your UMich email to get access to the server",
       });
