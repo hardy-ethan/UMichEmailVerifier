@@ -1,0 +1,1 @@
+Discord bot that grants a role upon a user logging in with their UMich Google account.
